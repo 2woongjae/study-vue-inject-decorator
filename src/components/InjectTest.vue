@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import { Vue, Component, Inject } from "vue-property-decorator";
-import { AxiosStatic } from "axios";
+import UserService from "../services/UserService";
 
 @Component
 export default class InjectTest extends Vue {
@@ -16,16 +16,11 @@ export default class InjectTest extends Vue {
     id: number;
     login: string;
   }[] = [];
-  @Inject() myHttp!: AxiosStatic;
+  @Inject() userService!: UserService;
 
   async created() {
     console.log("created");
-    try {
-      const res = await this.myHttp.get("https://api.github.com/users");
-      this.users = res.data;
-    } catch (error) {
-      console.log(error);
-    }
+    this.users = await this.userService.getUsers();
   }
 }
 </script>

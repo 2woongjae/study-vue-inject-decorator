@@ -66,8 +66,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Provide } from "vue-property-decorator";
-import axios from "axios";
 import InjectTest from "./InjectTest.vue";
+import UserService from "../services/UserService";
 
 @Component({
   components: {
@@ -77,7 +77,7 @@ import InjectTest from "./InjectTest.vue";
 export default class HelloWorld extends Vue {
   @Prop() msg!: string;
 
-  @Provide() myHttp = axios;
+  @Provide() userService = new UserService();
 }
 </script>
 
